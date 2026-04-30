@@ -1,0 +1,111 @@
+# ==========================================
+# BOSSMODE CONFIGURATION
+# ==========================================
+
+# Configuration of the attributes that the Boss player receives
+boss-attributes:
+  health: 1000.0             # Total health
+  scale: 1.5                 # Size (1.0 is normal, 1.5 is giant)
+  movement-speed: 0.15       # Speed (0.1 is normal)
+  attack-damage: 15.0        # Damage per hit
+  knockback-resistance: 1.0  # 1.0 = Immune to knockback (anti-hammer)
+  attack-knockback: 2.0      # How much the boss pushes when hitting
+
+# Visual interface configuration
+ui:
+  bossbar:
+    title: "&c&lFINAL BOSS: &e%player%"
+    color: RED             # PURPLE, BLUE, RED, GREEN, YELLOW, WHITE, PINK
+    style: NOTCHED_10      # SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20
+
+  scoreboard:
+    title: "&4&lBOSS EVENT"
+    # Scoreboard lines.
+    # %health% = Current boss health
+    # %top_name_X% = Top X player's name
+    # %top_dmg_X% = Top X player's damage
+    lines:
+      - "&7&m----------------"
+      - "&c&lBOSS HEALTH:"
+      - "&f%health% / %max_health% HP"
+      - ""
+      - "&6&lTOP DAMAGE:"
+      - "&e1. %top_name_1%: &c%top_dmg_1%"
+      - "&e2. %top_name_2%: &c%top_dmg_2%"
+      - "&e3. %top_name_3%: &c%top_dmg_3%"
+      - "&7&m----------------"
+
+# Boss abilities
+skills:
+  fireball:
+    item-name: "&6&lThrow Fireball"
+    item-material: BLAZE_ROD
+    power: 4                 # Explosion power
+    cooldown: 1000           # Milliseconds
+    message: "&eYou have thrown a fireball!"
+    cast-message: "&6Watch out! %player% launches fire!"
+
+  heal:
+    item-name: "&a&lMeditation"
+    item-material: NETHER_STAR
+    amount: 2               # Regeneration level
+    duration: 100           # Duration in ticks (20 ticks = 1 sec)
+    cooldown: 5000          # Milliseconds
+    message: "&aYou are regenerating health!"
+    cast-message: "&c&l[ALERT] &a%player% is regaining strength (Meditation)!"
+
+  summon:
+    item-name: "&5&lSummon Minions"
+    item-material: WITHER_SKELETON_SKULL
+    cooldown: 10000
+    message: "&5You have summoned your minions."
+    cast-message: "&c&l[ALERT] &5%player% has summoned reinforcements!"
+
+    # Wave configuration
+    amount: 5
+    mob-type: ZOMBIE
+
+    # Physical attributes of the minions
+    attributes:
+      health: 100.0         # Minion health
+      scale: 1.5            # Size (0.5 small, 2.0 giant)
+      follow-range: 20.0    # Distance at which they detect/follow players
+      speed: 0.25           # Speed (0.23 is normal zombie)
+
+    # Behavior and drop options
+    options:
+      fire-immune: true             # If true, they don't burn from sun/fire/lava
+      prevent-vanilla-drops: true   # If true, they don't drop rotten flesh or armor
+
+    # Custom drops (List of materials)
+    custom-drops:
+      - "GOLD_NUGGET"
+      - "EMERALD"
+
+    # Appearance
+    visual:
+      name: "&c&lMinion of %player%"
+      glowing: true
+
+    # Equipment
+    equipment:
+      helmet: NETHERITE_HELMET
+      chestplate: DIAMOND_CHESTPLATE
+      leggings: CHAINMAIL_LEGGINGS
+      boots: GOLDEN_BOOTS
+      main-hand: IRON_SWORD
+      off-hand: AIR
+
+# System messages (Use & for colors)
+messages:
+  prefix: "&c[BossMode] &r"
+  no-permission: "&cYou don't have permission."
+  player-not-found: "&cPlayer not found."
+  already-running: "&cAn event is already running."
+  event-start: "&c&lTHE BOSS HAS APPEARED! &eDefeat %player%!"
+  event-stop: "&eThe event has ended: %reason%"
+  boss-defeated: "The Boss has been annihilated!"
+  top-damage-header: "&6&l--- FINAL TOP DAMAGE ---"
+  top-damage-entry: "&e#%rank% %player% - &c%damage%"
+  cooldown-wait: "&cAbility on cooldown. Wait &e%time%s&c."
+  health-full: "&aYour health is already full!"
